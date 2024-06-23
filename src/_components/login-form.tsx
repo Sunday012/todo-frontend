@@ -20,7 +20,7 @@ export default function LoginForm() {
     const LoginUser = async (e : any) => {
         e.preventDefault()
         login(formData)
-        // window.location.href = "/mytodo"
+        window.location.href = "/mytodo"
     }
   return (
     <div className="w-full flex items-center justify-center">
