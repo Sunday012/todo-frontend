@@ -2,9 +2,9 @@ import './App.css'
 import { Hero } from './_components/hero'
 import { Route, Routes } from 'react-router-dom';
 import { Navbar } from './_components/navbar'
-import Todo from './_components/listTodo';
-import RegisterForm from './_components/register-form';
-import LoginForm from './_components/login-form';
+import MyTodo from './pages/mytodo';
+import Login from './pages/login';
+import Register from './pages/register';
 import { AuthProvider } from './context/authContext';
 
 function App() {
@@ -15,9 +15,9 @@ function App() {
     <AuthProvider>
       <Routes>
         <Route path="/" element={<Hero />}/>
-        <Route path="/mytodo" element={<Todo />}/>
-        <Route path="/register" element={<RegisterForm />}/>
-        <Route path="/login" element={<LoginForm />}/>
+        <Route path="/mytodo" element={<MyTodo />}/>
+        <Route path="/register" element={<Register />}/>
+        <Route path="/login" element={<Login />}/>
       </Routes>
     </AuthProvider>
     </div>
