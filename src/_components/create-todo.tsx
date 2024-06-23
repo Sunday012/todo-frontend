@@ -40,7 +40,7 @@ export function CreateTodo() {
           className="w-full rounded-md  flex flex-col"
         >
           <div className="flex items-center justify-center">
-            <div className=" aspect-video rounded-lg bg-[#333333] flex flex-col items-center justify-center text-white cursor-pointer px-8 py-10">
+            <div className=" rounded-lg bg-[#333333] flex flex-col items-center justify-center text-white cursor-pointer px-20 py-[78px]">
               <PlusIcon />
               <p className="font-bold">Create Todo</p>
             </div>

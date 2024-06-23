@@ -37,10 +37,10 @@ export const TodoCard = ({description, id, title, deadline, deadline_time} : Tod
       <div className="flex w-full items-center justify-between p-2 ">
       <div className="flex flex-col gap-4">
         <h1 className="font-bold text-[16px]">{title}</h1>
-        <p className="text-[12px]">
+        <p className="text-[12px] h-[14px]">
           {description}
         </p>
-        <p className="font-bold text-[14px]">Deadline: {deadline}</p>
+        <p className="font-bold text-[14px] h-[14px] my-4">Deadline: {deadline}</p>
         <p className="font-bold text-[14px]">Deadline-Time: {deadline_time}</p>
       </div>
       <div className="flex flex-col gap-4">
