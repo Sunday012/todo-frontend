@@ -2,13 +2,20 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 
 export const Hero = () => {
+  const token = window.localStorage.getItem('token')
   return (
     <div className="flex flex-col items-center justify-center w-full mt-14">
+      {token ? 
       <Link to="/mytodo">
       <Button className=" p-2 bg-amber-500/85 hover:bg-amber-500/100">
       Create Your First Todo
       </Button>
+      </Link> : <Link to="/login">
+      <Button className=" p-2 bg-amber-500/85 hover:bg-amber-500/100">
+      Create Your First Todo
+      </Button>
       </Link>
+    }
       <h1 className="md:text-5xl text-4xl font-bold max-w-2xl bg-clip-text text-transparent bg-gradient-to-r from-[#4EA8DE] via-[#5E60CE] to-purple-500 w-full text-center p-6 md:pt-10 pt-6">
         Hello there!, start planning your day with our APP
       </h1>
