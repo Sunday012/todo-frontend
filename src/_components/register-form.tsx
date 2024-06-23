@@ -16,7 +16,7 @@ export default function RegisterForm() {
     const RegisterUser = async (e : any) => {
         e.preventDefault()
         console.log(formData)
-        register(formData)
+        await register(formData)
         window.location.href = "/login"
     }
   return (

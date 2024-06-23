@@ -18,9 +18,9 @@ export default function LoginForm() {
     const onChange = (e : any) => setFormData({...formData, [e.target.name]:e.target.value})
     const {login} = useContext(AuthContext)
     const LoginUser = async (e : any) => {
-        e.preventDefault()
-        login(formData)
-        // window.location.href = "/mytodo"
+        e.preventDefault();
+        await login(formData)
+        window.location.href = "/mytodo"
     }
   return (
     <div className="w-full flex items-center justify-center">
