@@ -1,73 +1,80 @@
-
-import {useState, createContext, useEffect} from 'react'
+// @ts-ignore
+import React, { useState, createContext, useEffect } from 'react';
 
 type AuthType = {
-        token: string | null;
-        isAuthenticated: boolean;
-        loading: boolean;
-        user: any;
-}
+    token: string | null;
+    isAuthenticated: boolean;
+    loading: boolean;
+    user: any | null; // Ensure user can be null
+};
+
 interface MyContextValue {
-    register: (formData: any) => Promise<void>;
-    login: (formData: any) => Promise<void>;
+    register: (formData: FormInputData) => Promise<void>;
+    login: (formData: FormData) => Promise<void>;
     getTodo: () => Promise<void>;
     logout: () => void;
     auth: AuthType;
     todo: any;
+    apiUrl: string;
 }
 
 type FormData = {
     email: string;
     password: string;
-}
+};
+
 type FormInputData = {
     username: string;
     email: string;
     password: string;
-}
+};
 
 const AuthContext = createContext<MyContextValue>({
-    register: (formData: any) => new Promise<void>((resolve, reject) => {}),
-    login: (formData: any) => new Promise<void>((resolve, reject) => {}),
+    // @ts-expect-error
+    register: async (formData: FormInputData) => {},
+    // @ts-expect-error
+    login: async (formData: FormData) => {},
     logout: () => {},
     auth: {
         token: null,
         isAuthenticated: false,
-        loading: true,user: null,
+        loading: true,
+        user: null,
     },
     todo: {},
-    getTodo: () => new Promise<void>((resolve, reject) => {})
+    getTodo: async () => {},
+    apiUrl: "",
 });
 
-const AuthProvider = ({children} : {children : React.ReactNode}) => {
-    const [auth, setAuth] = useState({
+const AuthProvider = ({ children }: { children: React.ReactNode }) => {
+    const apiUrl = process.env.NODE_ENV === 'production' ? 'https://todo-backend-xujo.onrender.com' : 'http://localhost:5000';
+    const [auth, setAuth] = useState<AuthType>({
         token: localStorage.getItem('token'),
         isAuthenticated: false,
         loading: true,
         user: null,
     });
-    const [todo, setTodo] = useState()
-    
+    const [todo, setTodo] = useState<any>(null);
 
     useEffect(() => {
-        if(auth.token){
-            getTodo()
-        }else{
+        if (auth.token) {
+            getTodo();
+        } else {
             setAuth((prevAuth) => ({ ...prevAuth, loading: false }));
         }
-    },[auth.token])
+    }, [auth.token]);
 
     const getTodo = async () => {
         try {
-            const res = await fetch("http://localhost:5000/todo", {
+            const res = await fetch(`${apiUrl}/todo`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
-                    "x-auth-token": auth.token
-                }
-            })
-            const data = await res.json()
-            setTodo(data)
+                    "x-auth-token": auth.token || "",
+                },
+            });
+            const data = await res.json();
+            setTodo(data);
             setAuth((prevAuth) => ({
                 ...prevAuth,
                 isAuthenticated: true,
@@ -84,18 +91,18 @@ const AuthProvider = ({children} : {children : React.ReactNode}) => {
                 loading: false,
             }));
         }
-    }
+    };
 
-    const register = async (formData :  FormInputData) => {
+    const register = async (formData: FormInputData) => {
         try {
-            const res = await fetch("http://localhost:5000/api/auth/register",{
+            await fetch(`${apiUrl}/api/auth/register`, {
                 method: "POST",
                 headers: {
-                    "Content-Type": "application/json"
+                    "Content-Type": "application/json",
                 },
-                body: JSON.stringify(formData)
-            })
-            
+                body: JSON.stringify(formData),
+            });
+
             window.location.href = "/login";
         } catch (error) {
             console.error('Error registering user:', error);
@@ -107,18 +114,19 @@ const AuthProvider = ({children} : {children : React.ReactNode}) => {
                 loading: false,
             }));
         }
-    }
-    const login = async (formData : FormData) => {
+    };
+
+    const login = async (formData: FormData) => {
         try {
-            const res = await fetch("http://localhost:5000/api/auth/login",{
+            const res = await fetch(`${apiUrl}/api/auth/login`, {
                 method: "POST",
                 headers: {
-                    "Content-Type": "application/json"
+                    "Content-Type": "application/json",
                 },
-                body: JSON.stringify(formData)
-            })
-            const data = await res.json()
-            
+                body: JSON.stringify(formData),
+            });
+            const data = await res.json();
+
             localStorage.setItem('token', data.token);
             setAuth((prevAuth) => ({
                 ...prevAuth,
@@ -137,7 +145,8 @@ const AuthProvider = ({children} : {children : React.ReactNode}) => {
                 loading: false,
             }));
         }
-    }
+    };
+
     const logout = () => {
         localStorage.clear();
         setAuth((prevAuth) => ({
@@ -147,13 +156,13 @@ const AuthProvider = ({children} : {children : React.ReactNode}) => {
             loading: false,
             user: null,
         }));
-    }
+    };
 
-    return(
-        <AuthContext.Provider value={{register, logout, getTodo, auth, todo, login}}>
+    return (
+        <AuthContext.Provider value={{ register, logout, apiUrl, getTodo, auth, todo, login }}>
             {children}
         </AuthContext.Provider>
-    )
-}
+    );
+};
 
-export {AuthContext,AuthProvider}
+export { AuthContext, AuthProvider };

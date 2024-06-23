@@ -2,6 +2,8 @@ import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 // import { Dispatch, SetStateAction } from "react";
 import { EditTodo } from "./editTodo";
+import { AuthContext } from "@/context/authContext";
+import { useContext } from "react";
 
 type TodoData = {
     description : string;
@@ -14,11 +16,12 @@ type TodoData = {
     deadline_time: string;
 }
 export const TodoCard = ({description, id, title, deadline, deadline_time} : TodoData) => {
+  const {apiUrl} = useContext(AuthContext)
     // const arrayData = [todos]
     const handleDelete = async () => {
         console.log(id)
         try {
-            const res = await fetch(`http://localhost:5000/todo/${id}`,{
+            const res = await fetch(`${apiUrl}/todo/${id}`,{
                 method: "DELETE"
             })
             

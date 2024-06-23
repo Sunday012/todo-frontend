@@ -25,6 +25,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { DatePickerWithRange } from "./date-picker"
 import { DateRange } from "react-day-picker"
+import { AuthContext } from "@/context/authContext"
 
 type EditTodoProps = {
     description : string;
@@ -121,6 +122,7 @@ function ProfileForm({className, todo_id}: EditFormProps) {
   const [inputDescription, setInputDescription] = React.useState("");
   const [dateRange, setDateRange] = React.useState<DateRange | undefined>({from: undefined, to: undefined})
   const [inputTime, setInputTime] = React.useState<string | undefined>(undefined);
+  const {apiUrl} = React.useContext(AuthContext)
 
   const formatDate = (date: Date | undefined) => {
     return date ? date.toLocaleDateString('en-US', {weekday: 'short', month: 'short', day: 'numeric', year: 'numeric'}) : null
@@ -137,7 +139,7 @@ function ProfileForm({className, todo_id}: EditFormProps) {
     try {
         const body = { description: inputDescription , title: inputTitle, start_date, deadline, inputTime};
         console.log(body);
-        const res = await fetch(`http://localhost:5000/todo/${todo_id}`,{
+        const res = await fetch(`${apiUrl}/todo/${todo_id}`,{
             method: "PUT",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify(body)

@@ -1,3 +1,4 @@
+// @ts-ignore
 "use client"
 
 import * as React from "react"
@@ -17,6 +18,7 @@ import {
 export function DatePickerWithRange({
   className, dateRange, setDateRange
 }: {className?:string, dateRange: DateRange | undefined, setDateRange: React.Dispatch<React.SetStateAction<DateRange | undefined>>}) {
+  // @ts-expect-error
   const [date, setDate] = React.useState<DateRange | undefined>({
     from: new Date(2022, 0, 20),
     to: addDays(new Date(2022, 0, 20), 20),

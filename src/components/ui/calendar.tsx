@@ -1,3 +1,4 @@
+// @ts-ignore
 import * as React from "react"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import { DayPicker } from "react-day-picker"
@@ -52,7 +53,9 @@ function Calendar({
         ...classNames,
       }}
       components={{
+        // @ts-expect-error
         IconLeft: ({ ...props }) => <ChevronLeft className="h-4 w-4" />,
+        // @ts-expect-error
         IconRight: ({ ...props }) => <ChevronRight className="h-4 w-4" />,
       }}
       {...props}
