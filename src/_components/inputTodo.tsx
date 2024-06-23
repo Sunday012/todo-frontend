@@ -25,7 +25,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { DatePickerWithRange } from "./date-picker";
 import { DateRange } from "react-day-picker";
-import { AuthContext } from "@/context/authContext";
+// import { AuthContext } from "@/context/authContext";
 
 export function InputTodo() {
   const [open, setOpen] = React.useState(false);
@@ -98,7 +98,7 @@ function ProfileForm({ className }: React.ComponentProps<"form">) {
     from: undefined,
     to: undefined,
   });
-  const {apiUrl} = React.useContext(AuthContext)
+  // const {apiUrl} = React.useContext(AuthContext)
   const formatDate = (date: Date | undefined) => {
     return date
       ? date.toLocaleDateString("en-US", {
@@ -127,7 +127,7 @@ function ProfileForm({ className }: React.ComponentProps<"form">) {
     console.log(body);
     //   console.log(formattedDateRange?.from)
 
-    const res = await fetch(`${apiUrl}/todo`, {
+    const res = await fetch(`https://todo-backend-xujo.onrender.com/todo`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(body),
