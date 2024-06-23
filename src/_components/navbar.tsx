@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 import { Logout } from "./logout"
 import { InputTodo } from "./inputTodo"
 export const Navbar = () => {
-  const token = window.localStorage.getItem('token')
+  const token = localStorage.getItem('token')
   if(token){
     console.log(token)
   }

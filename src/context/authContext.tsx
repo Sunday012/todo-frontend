@@ -5,7 +5,7 @@ type AuthType = {
     token: string | null;
     isAuthenticated: boolean;
     loading: boolean;
-    user: any | null; // Ensure user can be null
+    user: any | null;
 };
 
 interface MyContextValue {

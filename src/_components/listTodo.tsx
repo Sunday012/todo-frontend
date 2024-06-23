@@ -16,9 +16,11 @@ type TodoProps = {
 export default function Todo(){
   const {auth} = useContext(AuthContext)
   const {token} = auth;
-  if(!token){
-    window.location.href = "/login"
-  }
+  useEffect(() => {
+    if (!token) {
+        window.location.href = "/login";
+    }
+}, [token]);
 
   return(
     <div>
@@ -48,7 +50,13 @@ function ListTodo() {
   };
   useEffect(() => {
     getTodos();
-  }, [getTodo, todo]);
+  }, []);
+
+useEffect(() => {
+    if (todo) {
+        setTodos(todo);
+    }
+}, [todo]);
 
 if(loading){
   return(

@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 
 export const Hero = () => {
-  const token = window.localStorage.getItem('token')
+  const token = localStorage.getItem('token')
   return (
     <div className="flex flex-col items-center justify-center w-full mt-14">
       {token ? 
