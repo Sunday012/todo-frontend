@@ -47,7 +47,7 @@ const AuthContext = createContext<MyContextValue>({
 });
 
 const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-    const apiUrl = process.env.REACT_APP_BACKEND_URL || 'http://localhost:5000';
+    const apiUrl = 'production' ? process.env.REACT_APP_BACKEND_URL : 'http://localhost:5000';
     const [auth, setAuth] = useState<AuthType>({
         token: localStorage.getItem('token'),
         isAuthenticated: false,
