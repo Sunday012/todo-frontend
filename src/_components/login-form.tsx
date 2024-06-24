@@ -4,6 +4,7 @@ import { Label } from "@/components/ui/label";
 import { Link } from "react-router-dom";
 import { useContext, useState } from "react";
 import { AuthContext } from "@/context/authContext";
+import {useNavigate} from "react-router-dom"
 // type TokenDataType = {
 //     id: string;
 //     username: string;
@@ -12,6 +13,7 @@ import { AuthContext } from "@/context/authContext";
 //     token: TokenDataType
 // }
 export default function LoginForm() {
+  const navigate = useNavigate()
     const [formData, setFormData] = useState({email:"", password:""})
     const {email, password} = formData
 
@@ -20,7 +22,7 @@ export default function LoginForm() {
     const LoginUser = async (e : any) => {
         e.preventDefault();
         await login(formData)
-        window.location.href = "/mytodo"
+        navigate("/mytodo")
     }
   return (
     <div className="w-full flex items-center justify-center">

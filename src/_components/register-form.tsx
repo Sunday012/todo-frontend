@@ -3,9 +3,10 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { AuthContext } from "@/context/authContext";
 import { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function RegisterForm() {
+    const navigate = useNavigate()
     const [formData, setFormData] = useState({username: "",email: "", password:""});
     const {username, email, password} = formData;
     const {register} = useContext(AuthContext)
@@ -17,7 +18,7 @@ export default function RegisterForm() {
         e.preventDefault()
         console.log(formData)
         await register(formData)
-        window.location.href = "/login"
+        navigate("/login")
     }
   return (
     <div className="w-full flex items-center justify-center">
