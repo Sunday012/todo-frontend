@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { InputTodo } from "./inputTodo";
 import { useEffect, useState } from "react";
 export const Navbar = () => {
