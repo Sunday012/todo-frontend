@@ -1,5 +1,6 @@
 // @ts-ignore
 import React, { useState, createContext, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 type AuthType = {
     token: string | null;
@@ -55,7 +56,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         user: null,
     });
     const [todo, setTodo] = useState<any>(null);
-
+    const navigate = useNavigate()
     useEffect(() => {
         if (auth.token) {
             getTodo();
@@ -103,7 +104,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
                 body: JSON.stringify(formData),
             });
 
-            window.location.href = "/login";
+            navigate("/login")
         } catch (error) {
             console.error('Error registering user:', error);
             localStorage.removeItem('token');
@@ -134,7 +135,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
                 isAuthenticated: true,
                 loading: false,
             }));
-            window.location.href = "/mytodo";
+            navigate("/mytodo")
         } catch (error) {
             console.error('Error logging in:', error);
             localStorage.removeItem('token');
