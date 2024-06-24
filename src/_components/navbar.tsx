@@ -20,7 +20,7 @@ export const Navbar = () => {
   const handleLogout = () => {
     localStorage.clear();
     setTokenState(false);
-    navigate("/login");
+    window.location.href = "/"
   };
 
   return (
@@ -32,12 +32,12 @@ export const Navbar = () => {
           </Link>
         </div>
         {
-          location.pathname === "/mytodo" ? (
+          tokenState || location.pathname === "/mytodo" ? (
             <div className="flex gap-4 items-center">
               <InputTodo />
               <Button onClick={handleLogout}>Logout</Button>
             </div>
-          ) : (
+          ) :  (
             <div className="flex gap-4">
               <Button variant="outline">
                 <Link to="/login">Login</Link>
@@ -48,6 +48,21 @@ export const Navbar = () => {
             </div>
           )
         }
+        {/* {tokenState && location.pathname !== "/mytodo" ? (
+            <div className="flex gap-4 items-center">
+            <InputTodo />
+            <Button onClick={handleLogout}>Logout</Button>
+          </div>
+          ) : (
+            <div className="flex gap-4">
+              <Button variant="outline">
+                <Link to="/login">Login</Link>
+              </Button>
+              <Button className="bg-gradient-to-r from-[#4EA8DE] to-[#5E60CE] text-white py-2">
+                <Link to="/register">Register</Link>
+              </Button>
+            </div>
+          )} */}
       </div>
     </div>
   );
