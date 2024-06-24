@@ -16,10 +16,12 @@ export default function LoginForm() {
   const navigate = useNavigate()
     const [formData, setFormData] = useState({email:"", password:""})
     const {email, password} = formData
+    const [isloading, setIsLoading] = useState(false)
 
     const onChange = (e : any) => setFormData({...formData, [e.target.name]:e.target.value})
     const {login} = useContext(AuthContext)
     const LoginUser = async (e : any) => {
+      setIsLoading(true)
         e.preventDefault();
         await login(formData)
         navigate("/mytodo")
@@ -43,6 +45,14 @@ export default function LoginForm() {
             </Link>
         </div>
     </form>
+    {isloading ? (
+      <div className="flex h-screen items-center justify-center">
+      <div
+        className="h-10 w-10 animate-spin rounded-full border-4 border-blue-500 border-opacity-50"
+      ></div>
+      <div className="w-full h-screen inset-0 bg-inherit" />
+    </div>
+    ): null}
     </div>
   )
 }

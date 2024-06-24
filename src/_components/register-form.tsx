@@ -7,6 +7,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 export default function RegisterForm() {
     const navigate = useNavigate()
+    const [isloading, setIsLoading] = useState(false)
     const [formData, setFormData] = useState({username: "",email: "", password:""});
     const {username, email, password} = formData;
     const {register} = useContext(AuthContext)
@@ -16,6 +17,7 @@ export default function RegisterForm() {
 
     const RegisterUser = async (e : any) => {
         e.preventDefault()
+        setIsLoading(true)
         console.log(formData)
         await register(formData)
         navigate("/login")
@@ -43,6 +45,14 @@ export default function RegisterForm() {
             </Link>
         </div>
     </form>
+    {isloading ? (
+      <div className="flex h-screen items-center justify-center">
+      <div
+        className="h-10 w-10 animate-spin rounded-full border-4 border-blue-500 border-opacity-50"
+      ></div>
+      <div className="w-full h-screen inset-0 bg-inherit" />
+    </div>
+    ): null}
     </div>
   )
 }
