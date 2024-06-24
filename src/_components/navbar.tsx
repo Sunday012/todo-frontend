@@ -12,7 +12,7 @@ export const Navbar = () => {
         <div className="w-full flex items-center justify-between px-4">
             <div>
               <Link to="/">
-                <h1 className="text-white font-bold text-xl">Doet</h1>
+                <h1 className=" text-blue-200 font-bold text-4xl">Doet</h1>
               </Link>
             </div>
             {token ? (
