@@ -44,6 +44,7 @@ export default function RegisterForm() {
             name="username"
             value={username}
             onChange={onChange}
+            required
           />
         </div>
         <div className="w-full space-y-2">
@@ -57,6 +58,7 @@ export default function RegisterForm() {
             name="email"
             value={email}
             onChange={onChange}
+            required
           />
         </div>
         <div className="w-full space-y-2">
@@ -70,6 +72,7 @@ export default function RegisterForm() {
             name="password"
             value={password}
             onChange={onChange}
+            required
           />
         </div>
         <Button

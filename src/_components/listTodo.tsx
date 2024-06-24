@@ -1,4 +1,5 @@
 import { useEffect, useState, Suspense, useContext } from "react";
+import {useNavigate} from "react-router-dom"
 import { TodoCard } from "./todocard";
 import { EmptyTodo } from "./emptytodo";
 import { AuthContext } from "@/context/authContext";
@@ -7,10 +8,11 @@ import { CreateTodo } from "./create-todo";
 export default function Todo() {
     const { auth } = useContext(AuthContext);
     const { token } = auth;
+    const navigate = useNavigate()
 
     useEffect(() => {
         if (!token) {
-            window.location.href = "/login";
+            navigate("/login")
         }
     }, [token]);
 

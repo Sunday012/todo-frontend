@@ -45,6 +45,7 @@ export default function LoginForm() {
             name="email"
             value={email}
             onChange={onChange}
+            required
           />
         </div>
         <div className="w-full space-y-2">
@@ -58,6 +59,7 @@ export default function LoginForm() {
             name="password"
             value={password}
             onChange={onChange}
+            required
           />
         </div>
         <Button
@@ -67,7 +69,7 @@ export default function LoginForm() {
           Login
         </Button>
         <div className="flex gap-2">
-          <p className="text-white">Don't have an account already?</p>
+          <p className="text-white">Don't have an account yet?</p>
           <Link to="/register" className="text-white">
             Register
           </Link>
