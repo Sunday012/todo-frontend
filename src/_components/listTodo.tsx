@@ -24,7 +24,7 @@ export default function Todo() {
 function ListTodo() {
     const [todos, setTodos] = useState<any>([]);
     const { getTodo, todo, auth } = useContext(AuthContext);
-    const { loading } = auth;
+    const { loading} = auth;
 
     useEffect(() => {
         getTodo();
