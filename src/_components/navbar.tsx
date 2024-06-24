@@ -4,13 +4,12 @@ import { InputTodo } from "./inputTodo";
 import { useEffect, useState } from "react";
 export const Navbar = () => {
   const [tokenState, setTokenState] = useState(false);
-  const navigate = useNavigate();
   const location = useLocation();
 
   useEffect(() => {
   const token = localStorage.getItem("token");
     if(token){
-      setTokenState(true)
+      setTokenState(!!token)
       console.log(token);
     }
   }, []);

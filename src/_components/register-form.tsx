@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { AuthContext } from "@/context/authContext";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 export default function RegisterForm() {
@@ -14,7 +14,14 @@ export default function RegisterForm() {
     password: "",
   });
   const { username, email, password } = formData;
-  const { register } = useContext(AuthContext);
+  const { register, auth } = useContext(AuthContext);
+  const { token } = auth;
+
+  useEffect(() => {
+      if (token) {
+          navigate("/")
+      }
+  }, [token]);
   const onChange = (e: any) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };

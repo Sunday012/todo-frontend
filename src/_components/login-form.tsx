@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Link } from "react-router-dom";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "@/context/authContext";
 import { useNavigate } from "react-router-dom";
 // type TokenDataType = {
@@ -17,6 +17,14 @@ export default function LoginForm() {
   const [formData, setFormData] = useState({ email: "", password: "" });
   const { email, password } = formData;
   const [isloading, setIsLoading] = useState(false);
+  const { auth } = useContext(AuthContext);
+    const { token } = auth;
+
+    useEffect(() => {
+        if (token) {
+            navigate("/")
+        }
+    }, [token]);
 
   const onChange = (e: any) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
